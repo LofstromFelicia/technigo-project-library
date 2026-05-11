@@ -196,13 +196,14 @@ const loadBooks = (bookArray) => {
     container.innerHTML += `
       <div class="card">
         <span class="genre-tag">${book.genre}</span>
+        <button class="like-btn" onclick="this.classList.toggle('liked')">❤️</button>
         <img src="${book.image}" alt="${book.title}" />
         <div class="card-content>
           <h2>${book.title}</h2>
-          <p><strong>Author:</strong> ${book.author}</p>
-          <p><strong>Year:</strong> ${book.year}</p>
-          <p class="book-rating"><strong>Rating:</strong> ${book.rating}</p>
-          <button class="like-btn" onclick="this.classList.toggle('liked')">❤️</button>
+          <p class="author">By ${book.author}</p>
+          <p class="book-year>Published: ${book.year}</p>
+          <p class="book-rating">⭐ ${book.rating}</p>
+          <p class="description">${book.description}</p>
       </div>
     </div>
   `
