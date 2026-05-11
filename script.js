@@ -235,3 +235,14 @@ const sortBooksByRating = () => {
 }
 
 sortRatingBtn.addEventListener("click", sortBooksByRating)
+
+const randomBtn = document.getElementById("randomBtn")
+
+const showRandomBook = () => {
+  const randomIndex = Math.floor(Math.random() * books.length)
+  const randomBook = books[randomIndex]
+
+  loadBooks([randomBook])
+}
+
+randomBtn.addEventListener("click", showRandomBook)
