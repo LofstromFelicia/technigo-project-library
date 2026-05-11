@@ -20,31 +20,35 @@
   <main>
 
     <section id="controls">
-      <!--Group for genre-buttons-->
-      <div class="filter-group">
-        <button class="filter-btn" data-genre="All">All Genres</button>
-        <button class="filter-btn" data-genre="Fantasy">Fantasy</button>
-        <button class="filter-btn" data-genre="Dystopian">Dystopian</button>
-        <button class="filter-btn" data-genre="Science Fiction">Sci-Fi</button>
-        <button class="filter-btn" data-genre="Mystery">Mystery</button>
-      </div>
-      <div class="search-wrapper">
-        <input type="text" id="searchInput" placeholder="Search by title or author..." />
-        <span class="search-icon">🔍</span>
+      <div class="level search-section">
+        <div class="search-wrapper">
+          <input type="text" id="searchInput" placeholder="Search by title or author..." />
+          <span class="search-icon">🔍</span>
+        </div>
       </div>
 
-      <!--Group for sort and special functions-->
-      <div class="sort-group">
-        <label for="sortSelector">Sort by:</label>
-        <select id="sortSelector">
-          <option value="none">Default</option>
-          <option value="ratingHigh">Rating: High to Low</option>
-          <option value="ratingLow">Rating: Low to High</option>
-          <option value="yearNew">Year: Newest</option>
-          <option value="yearOld">Year: Oldest</option>
-        </select>
+      <div class="control-panel">
+        <div class="level filter-group">
+          <button class="filter-btn" data-genre="All">All Genres</button>
+          <button class="filter-btn" data-genre="Fantasy">Fantasy</button>
+          <button class="filter-btn" data-genre="Dystopian">Dystopian</button>
+          <button class="filter-btn" data-genre="Science Fiction">Sci-Fi</button>
+          <button class="filter-btn" data-genre="Mystery">Mystery</button>
+        </div>
 
-        <button id="randomBtn" class="special-btn">Surprise Me!</button>
+        <div class="level sort-group">
+          <div class="sort-container">
+            <label for="sortSelector">Sort by:</label>
+            <select id="sortSelector">
+              <option value="none">Default</option>
+              <option value="ratingHigh">Rating: High to Low</option>
+              <option value="ratingLow">Rating: Low to High</option>
+              <option value="yearNew">Year: Newest</option>
+              <option value="yearOld">Year: Oldest</option>
+            </select>
+          </div>
+          <button id="randomBtn" class="special-btn">✨ Surprise Me!</button>
+        </div>
       </div>
     </section>
 
