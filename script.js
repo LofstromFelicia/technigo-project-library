@@ -184,7 +184,6 @@ const books = [
 const container = document.getElementById("container")
 
 const loadBooks = (bookArray) => {
-  // Tömmer behållaren så det inte ligger gammalt skräp där 
   container.innerHTML = ""
 
   bookArray.forEach((book) => {
@@ -203,6 +202,7 @@ const loadBooks = (bookArray) => {
 
 loadBooks(books);
 
+// Filter by Genre 
 const filterAll = document.getElementById("filterAll")
 const filterFantasy = document.getElementById("filterFantasy")
 const filterFiction = document.getElementById("filterFiction")
@@ -222,3 +222,16 @@ const filterBooks = (genre) => {
 filterAll.addEventListener("click", () => filterBooks("All"))
 filterFantasy.addEventListener("click", () => filterBooks("Fantasy"))
 filterFiction.addEventListener("click", () => filterBooks("Fiction"))
+
+// Rating Sort 
+const sortRatingBtn = document.getElementById("sortRating")
+
+const sortBooksByRating = () => {
+  const sortedList = [...books].sort((a, b) => {
+    return b.rating - a.rating
+  })
+
+  loadBooks(sortedList)
+}
+
+sortRatingBtn.addEventListener("click", sortBooksByRating)
