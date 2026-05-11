@@ -10,19 +10,25 @@
 
 <body>
 
-  <header>
-    <h1>My Digital Library</h1>
+  <header class="hero">
+    <h1>The Grand Library</h1>
+    <p>Discover your next great adventure</p>
   </header>
 
   <main>
-    <!--Här skapar jag en knapp för filter och sortering senare-->
+
     <section id="controls">
-      <button id="filterAll">All Genres</button>
-      <button id="filterFantasy">Fantasy</button>
-      <button id="filterFiction">Fiction</button>
+      <button class="filter-btn" data-genre="All">All Genres</button>
+      <button class="filter-btn" data-genre="Fantasy">Fantasy</button>
+      <button class="filter-btn" data-genre="Dystopian">Dystopian</button>
+      <button class="filter-btn" data-genre="Science Fiction">Sci-Fi</button>
+      <button class="filter-btn" data-genre="Mystery">Mystery</button>
+
+
+      <button id="sortRating">Sort by Rating</button>
+      <button id="randomBtn">Surprise Me!</button>
     </section>
 
-    <!--Här under hamnar böckerna-->
     <section id="container"></section>
   </main>
 

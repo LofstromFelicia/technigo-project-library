@@ -189,12 +189,13 @@ const loadBooks = (bookArray) => {
   bookArray.forEach((book) => {
     container.innerHTML += `
   <div class="card">
+  <span class="genre-tag">${book.genre}</span>
   <img src="${book.image}" alt="${book.title}" />
   <h2>${book.title}</h2>
   <p><strong>Author:</strong> ${book.author}</p>
   <p><strong>Year:</strong> ${book.year}</p>
   <p><strong>Genre:</strong> ${book.genre}</p>
-  <p><strong>Rating:</strong> ${book.rating}</p>
+  <p class="book-rating"><strong>Rating:</strong> ${book.rating}</p>
   </div>
   `
   })
@@ -202,10 +203,8 @@ const loadBooks = (bookArray) => {
 
 loadBooks(books);
 
-// Filter by Genre 
-const filterAll = document.getElementById("filterAll")
-const filterFantasy = document.getElementById("filterFantasy")
-const filterFiction = document.getElementById("filterFiction")
+// Filter by Genre
+const filterButtons = document.querySelectorAll(".filter-btn")
 
 const filterBooks = (genre) => {
   if (genre === "All") {
@@ -219,9 +218,12 @@ const filterBooks = (genre) => {
   }
 }
 
-filterAll.addEventListener("click", () => filterBooks("All"))
-filterFantasy.addEventListener("click", () => filterBooks("Fantasy"))
-filterFiction.addEventListener("click", () => filterBooks("Fiction"))
+filterButtons.forEach((button) => {
+  button.addEventListener("click", () => {
+    const genre = button.getAttribute("data-genre")
+    filterBooks(genre)
+  })
+})
 
 // Rating Sort 
 const sortRatingBtn = document.getElementById("sortRating")
