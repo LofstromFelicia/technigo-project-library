@@ -1,25 +1,41 @@
+:root {
+  --kindle-bg: #f4f1ea;
+  /* Like old paper */
+  --kindle-text: #2c2c2c;
+  /* dark grey */
+  --kindle-accent: #5d5d5d;
+  /* Other info */
+  --magic-gold: #b39b5d;
+  /* magic touch on the buttons */
+}
+
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: #f4f4f4;
-  background-color: white;
+  font-family: 'Playfair Display', serif;
+  background-color: var(--kindle-bg);
+  color: var(--kindle-text);
   margin: 0;
   padding: 20px;
 }
 
 .hero {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  color: white;
-  padding: 60px 20px;
+  padding: 80px 20px;
   text-align: center;
-  border-bottom: 4px solid #f1c40f;
+  border-bottom: 1px double var(--kindle-accent);
+  margin-bottom: 40px;
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
+  font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  letter-spacing: 4px;
+  margin: 0;
+}
+
+.hero p {
+  font-style: italic;
+  opacity: 0.8;
+  margin-top: 10px;
 }
 
 #container {
@@ -47,9 +63,12 @@ body {
 }
 
 .card img {
-  width: 100%;
-  height: 350px;
-  object-fit: cover;
+  filter: sepia(0.3) contrast(1.1);
+  transition: filter 0.5s;
+}
+
+.card:hover img {
+  filter: sepia(0);
 }
 
 .card h2 {
@@ -98,7 +117,7 @@ body {
   box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
-button {
+.button {
   background-color: white;
   color: #2c3e50;
   border: 2px solid #2c3e50;
@@ -130,13 +149,25 @@ button:hover {
   border: 1px solid #ccc;
 }
 
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--kindle-accent);
+  color: var(--kindle-text);
+  padding: 8px 16px;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.filter-btn:hover {
+  background: var(--kindle-text);
+  color: var(--kindle-bg);
+}
+
 .special-btn {
-  background-color: #f1c40f;
-  padding: 12px 25px;
-  font-size: 1.1rem;
-  border: none;
+  border: 2px solid var(--magic-gold);
+  color: var(--magic-gold);
   font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .like-btn {
@@ -163,4 +194,53 @@ button:hover {
 .like-btn.liked {
   background: #ff4757;
   transform: scale(1.1);
+}
+
+.search-wrapper {
+  position: relative;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+#searchInput {
+  width: 100%;
+  padding: 12px 15px 12px 40px;
+  border: 1px solid #b39b5d;
+  background: transparent;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #2c2c2c;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+
+#searchInput:focus {
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 8px rgba(179, 155, 93, 0.2);
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 50px;
+  font-family: 'Playfair Display', serif;
+}
+
+.no-results p {
+  font-style: italic;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #b39b5d;
+}
+
+.no-results span {
+  opacity: 0.6;
 }

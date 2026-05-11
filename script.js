@@ -185,10 +185,26 @@ const container = document.getElementById("container")
 const sortSelector = document.getElementById("sortSelector")
 const randomBtn = document.getElementById("randomBtn")
 const filterButtons = document.querySelectorAll(".filter-btn")
+const searchInput = document.getElementById("searchInput")
 
-// Function for books 
+// books-function
 const loadBooks = (bookArray) => {
   container.innerHTML = ""
+
+  if (!Array.isArray(bookArray)) {
+    console.error("loadBooks fick ingen array!")
+    return
+  }
+
+  if (bookArray.length === 0) {
+    container.innerHTML = `
+    <div class="no-results">
+    <p>"Not all those who wander are lost..."</p>
+    <span>But we couldn't find that book in our library.</span>
+    </div>
+    `
+    return
+  }
 
   bookArray.forEach((book) => {
     if (!book) return
@@ -198,10 +214,10 @@ const loadBooks = (bookArray) => {
         <span class="genre-tag">${book.genre}</span>
         <button class="like-btn" onclick="this.classList.toggle('liked')">❤️</button>
         <img src="${book.image}" alt="${book.title}" />
-        <div class="card-content>
+        <div class="card-content">
           <h2>${book.title}</h2>
           <p class="author">By ${book.author}</p>
-          <p class="book-year>Published: ${book.year}</p>
+          <p class="book-year">Published: ${book.year}</p>
           <p class="book-rating">⭐ ${book.rating}</p>
           <p class="description">${book.description}</p>
       </div>
@@ -210,15 +226,16 @@ const loadBooks = (bookArray) => {
   })
 }
 
-// Filter-function 
+
+
+// Filter-function (Genre)
 const filterBooks = (genre) => {
   if (genre === "All") {
     loadBooks(books)
   } else {
-    const filteredList = books.filter((book) => {
-      return book.genre.toLowerCase() === genre.toLowerCase()
-    })
-
+    const filteredList = books.filter((book) =>
+      book.genre.toLowerCase() === genre.toLowerCase()
+    )
     loadBooks(filteredList)
   }
 }
@@ -227,7 +244,7 @@ const filterBooks = (genre) => {
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const genre = button.getAttribute("data-genre")
-    filterBooks(genre)
+    filterBooksByGenre(genre)
   })
 })
 
@@ -244,11 +261,23 @@ sortSelector.addEventListener("change", (event) => {
     sortedArray.sort((a, b) => b.year - a.year)
   } else if (sortBy === "yearOld") {
     sortedArray.sort((a, b) => a.year - b.year)
-  } else if (sortBy === "none") {
-    sortedArray = books
   }
 
   loadBooks(sortedArray)
+})
+
+// search bar 
+searchInput.addEventListener("input", (e) => {
+  const value = e.target.value.toLowerCase()
+
+  const filteredBooks = books.filter((book) => {
+    return (
+      book.title.toLowerCase().includes(value) ||
+      book.author.toLowerCase().includes(value)
+    )
+  })
+
+  loadBooks(filteredBooks)
 })
 
 // SURPRISE ME (Updated)
