@@ -18,17 +18,31 @@
   <main>
 
     <section id="controls">
-      <button class="filter-btn" data-genre="All">All Genres</button>
-      <button class="filter-btn" data-genre="Fantasy">Fantasy</button>
-      <button class="filter-btn" data-genre="Dystopian">Dystopian</button>
-      <button class="filter-btn" data-genre="Science Fiction">Sci-Fi</button>
-      <button class="filter-btn" data-genre="Mystery">Mystery</button>
+      <!--Group for genre-buttons-->
+      <div class="filter-group">
+        <button class="filter-btn" data-genre="All">All Genres</button>
+        <button class="filter-btn" data-genre="Fantasy">Fantasy</button>
+        <button class="filter-btn" data-genre="Dystopian">Dystopian</button>
+        <button class="filter-btn" data-genre="Science Fiction">Sci-Fi</button>
+        <button class="filter-btn" data-genre="Mystery">Mystery</button>
+      </div>
 
+      <!--Group for sort and special functions-->
+      <div class="sort-group">
+        <label for="sortSelector">Sort by:</label>
+        <select id="sortSelector">
+          <option value="none">Default</option>
+          <option value="ratingHigh">Rating: High to Low</option>
+          <option value="ratingLow">Rating: Low to High</option>
+          <option value="yearNew">Year: Newest</option>
+          <option value="yearOld">Year: Oldest</option>
+        </select>
 
-      <button id="sortRating">Sort by Rating</button>
-      <button id="randomBtn">Surprise Me!</button>
+        <button id="randomBtn" class="special-btn">Surprise Me!</button>
+      </div>
     </section>
 
+    <!--What does container below do?-->
     <section id="container"></section>
   </main>
 

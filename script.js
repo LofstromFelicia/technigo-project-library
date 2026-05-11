@@ -182,30 +182,34 @@ const books = [
 ]
 
 const container = document.getElementById("container")
+const sortSelector = document.getElementById("sortSelector")
+const randomBtn = document.getElementById("randomBtn")
+const filterButtons = document.querySelectorAll(".filter-btn")
 
+// Function for books 
 const loadBooks = (bookArray) => {
   container.innerHTML = ""
 
   bookArray.forEach((book) => {
+    if (!book) return
+
     container.innerHTML += `
-  <div class="card">
-  <span class="genre-tag">${book.genre}</span>
-  <img src="${book.image}" alt="${book.title}" />
-  <h2>${book.title}</h2>
-  <p><strong>Author:</strong> ${book.author}</p>
-  <p><strong>Year:</strong> ${book.year}</p>
-  <p><strong>Genre:</strong> ${book.genre}</p>
-  <p class="book-rating"><strong>Rating:</strong> ${book.rating}</p>
-  </div>
+      <div class="card">
+        <span class="genre-tag">${book.genre}</span>
+        <img src="${book.image}" alt="${book.title}" />
+        <div class="card-content>
+          <h2>${book.title}</h2>
+          <p><strong>Author:</strong> ${book.author}</p>
+          <p><strong>Year:</strong> ${book.year}</p>
+          <p class="book-rating"><strong>Rating:</strong> ${book.rating}</p>
+          <button class="like-btn" onclick="this.classList.toggle('liked')">❤️</button>
+      </div>
+    </div>
   `
   })
 }
 
-loadBooks(books);
-
-// Filter by Genre
-const filterButtons = document.querySelectorAll(".filter-btn")
-
+// Filter-function 
 const filterBooks = (genre) => {
   if (genre === "All") {
     loadBooks(books)
@@ -218,6 +222,7 @@ const filterBooks = (genre) => {
   }
 }
 
+// filter-button
 filterButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const genre = button.getAttribute("data-genre")
@@ -225,26 +230,30 @@ filterButtons.forEach((button) => {
   })
 })
 
-// Rating Sort 
-const sortRatingBtn = document.getElementById("sortRating")
+// Sorting (new drop down)
+sortSelector.addEventListener("change", (event) => {
+  const sortBy = event.target.value
+  let sortedArray = [...books]
 
-const sortBooksByRating = () => {
-  const sortedList = [...books].sort((a, b) => {
-    return b.rating - a.rating
-  })
+  if (sortBy === "ratingHigh") {
+    sortedArray.sort((a, b) => b.rating - a.rating)
+  } else if (sortBy === "ratingLow") {
+    sortedArray.sort((a, b) => a.rating - b.rating)
+  } else if (sortBy === "yearNew") {
+    sortedArray.sort((a, b) => b.year - a.year)
+  } else if (sortBy === "yearOld") {
+    sortedArray.sort((a, b) => a.year - b.year)
+  } else if (sortBy === "none") {
+    sortedArray = books
+  }
 
-  loadBooks(sortedList)
-}
+  loadBooks(sortedArray)
+})
 
-sortRatingBtn.addEventListener("click", sortBooksByRating)
-
-const randomBtn = document.getElementById("randomBtn")
-
-const showRandomBook = () => {
+// SURPRISE ME (Updated)
+randomBtn.addEventListener("click", () => {
   const randomIndex = Math.floor(Math.random() * books.length)
-  const randomBook = books[randomIndex]
+  loadBooks([books[randomIndex]])
+})
 
-  loadBooks([randomBook])
-}
-
-randomBtn.addEventListener("click", showRandomBook)
+loadBooks(books)
