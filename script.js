@@ -201,4 +201,24 @@ const loadBooks = (bookArray) => {
   })
 }
 
-loadBooks(books); 
+loadBooks(books);
+
+const filterAll = document.getElementById("filterAll")
+const filterFantasy = document.getElementById("filterFantasy")
+const filterFiction = document.getElementById("filterFiction")
+
+const filterBooks = (genre) => {
+  if (genre === "All") {
+    loadBooks(books)
+  } else {
+    const filteredList = books.filter((book) => {
+      return book.genre.toLowerCase() === genre.toLowerCase()
+    })
+
+    loadBooks(filteredList)
+  }
+}
+
+filterAll.addEventListener("click", () => filterBooks("All"))
+filterFantasy.addEventListener("click", () => filterBooks("Fantasy"))
+filterFiction.addEventListener("click", () => filterBooks("Fiction"))
