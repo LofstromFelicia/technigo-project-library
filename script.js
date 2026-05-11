@@ -180,3 +180,25 @@ const books = [
     image: './books-images/unknown.jpg'
   }
 ]
+
+const container = document.getElementById("container")
+
+const loadBooks = (bookArray) => {
+  // Tömmer behållaren så det inte ligger gammalt skräp där 
+  container.innerHTML = ""
+
+  bookArray.forEach((book) => {
+    container.innerHTML += `
+  <div class="card">
+  <img src="${book.image}" alt="${book.title}" />
+  <h2>${book.title}</h2>
+  <p><strong>Author:</strong> ${book.author}</p>
+  <p><strong>Year:</strong> ${book.year}</p>
+  <p><strong>Genre:</strong> ${book.genre}</p>
+  <p><strong>Rating:</strong> ${book.rating}</p>
+  </div>
+  `
+  })
+}
+
+loadBooks(books); 
