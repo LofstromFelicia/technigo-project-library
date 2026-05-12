@@ -226,8 +226,6 @@ const loadBooks = (bookArray) => {
   })
 }
 
-
-
 // Filter-function (Genre)
 const filterBooks = (genre) => {
   if (genre === "All") {
@@ -261,6 +259,10 @@ sortSelector.addEventListener("change", (event) => {
     sortedArray.sort((a, b) => b.year - a.year)
   } else if (sortBy === "yearOld") {
     sortedArray.sort((a, b) => a.year - b.year)
+  } else if (sortBy === "alphaAz") {
+    sortedArray.sort((a, b) => a.title.localeCompare(b.title))
+  } else if (sortBy === "alphaZa") {
+    sortedArray.sort((a, b) => b.title.localeCompare(a.title))
   }
 
   loadBooks(sortedArray)
