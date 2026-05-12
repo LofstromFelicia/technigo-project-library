@@ -160,6 +160,8 @@ This achieves the organic, uneven look with maximum browser compatibility. :)
   width: 100%;
   margin-bottom: 20px;
   break-inside: avoid;
+  position: relative;
+
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
