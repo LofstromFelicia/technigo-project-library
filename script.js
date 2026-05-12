@@ -227,11 +227,11 @@ const loadBooks = (bookArray) => {
 }
 
 // Filter-function (Genre)
-const filterBooks = (genre) => {
+const filterBooksByGenre = (genre) => {
   if (genre === "All") {
     loadBooks(books)
   } else {
-    const filteredList = books.filter((book) =>
+    const filteredList = books.filter(book =>
       book.genre.toLowerCase() === genre.toLowerCase()
     )
     loadBooks(filteredList)
@@ -239,10 +239,16 @@ const filterBooks = (genre) => {
 }
 
 // filter-button
-filterButtons.forEach((button) => {
-  button.addEventListener("click", () => {
-    const genre = button.getAttribute("data-genre")
-    filterBooksByGenre(genre)
+filterButtons.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    filterButtons.forEach(button => button.classList.remove("active-filter"))
+    event.currentTarget.classList.add("active-filter")
+
+    const selectedGenre = event.currentTarget.getAttribute("data-genre")
+
+    console.log("1. Du klickade på genren:", selectedGenre)
+
+    filterBooksByGenre(selectedGenre)
   })
 })
 
@@ -272,14 +278,14 @@ sortSelector.addEventListener("change", (event) => {
 searchInput.addEventListener("input", (e) => {
   const value = e.target.value.toLowerCase()
 
-  const filteredBooks = books.filter((book) => {
+  const searchedBooks = books.filter((book) => {
     return (
       book.title.toLowerCase().includes(value) ||
       book.author.toLowerCase().includes(value)
     )
   })
 
-  loadBooks(filteredBooks)
+  loadBooks(searchedBooks)
 })
 
 // SURPRISE ME (Updated)

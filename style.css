@@ -97,6 +97,13 @@ body {
   box-shadow: 4px 4px 0px var(--magic-gold);
 }
 
+.filter-btn.active-filter {
+  background: var(--kindle-text);
+  color: var(--kindle-bg);
+  box-shadow: none;
+  transform: translate(1px, 1px);
+}
+
 /* --- LEVEL 3 : SORT & SURPRISE --- */
 .sort-group {
   border-top: 1px double rgba(0, 0, 0, 0.1);
