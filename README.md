@@ -5,7 +5,7 @@ An interactive web application designed to explore, search, and filter a collect
 ## View it live 
 Github: https://lofstromfelicia.github.io/technigo-project-library/
 
-Cloudflare Pages: 
+Cloudflare Pages: the-grand-digital-library-project-technigo.pages.dev
 
 ## 🚀 Key Features
 
