@@ -3,7 +3,7 @@
 An interactive web application designed to explore, search, and filter a collection of books. This project focuses on clean JavaScript logic and modern CSS layout techniques to create a seamless user experience.
 
 ## View it live 
-Github: 
+Github: https://lofstromfelicia.github.io/technigo-project-library/
 
 Cloudflare Pages: 
 
