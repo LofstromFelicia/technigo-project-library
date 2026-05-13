@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 :root {
   /* LIGHT MODE - STANDARD */
   --bg-color: #f4f1ea;
