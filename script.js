@@ -204,12 +204,12 @@ const loadBooks = (bookArray) => {
 
   bookArray.forEach((book) => {
     container.innerHTML += `
-      <div class="card">
+      <article class="card">
       <span class="genre-tag">${book.genre}</span>
       <button class="like-btn" onclick="this.classList.toggle('liked')">
       ❤️
       </button>
-      <img src="${book.image}" alt="${book.title}" />
+      <img src="${book.image}" alt="Book cover of ${book.title}: ${book.description.substring(0, 50)}..." />
         <div class="card-content">
           <h2>${book.title}</h2>
           <p class="author">By ${book.author}</p>
@@ -217,7 +217,7 @@ const loadBooks = (bookArray) => {
           <p class="book-rating">⭐ ${book.rating}</p>
           <p class="description">${book.description}</p>
       </div>
-    </div >
+    </article >
   `
   })
 }
