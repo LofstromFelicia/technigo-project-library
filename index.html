@@ -17,49 +17,55 @@
     <p>Discover your next great adventure</p>
   </header>
 
+  <button id="darkModeToggle" onclick="toggleDarkMode()">🌙</button>
+
   <main>
 
     <section id="controls">
-      <div class="level search-section">
+      <!-- SEARCH BAR & DARK MODE -->
+      <div class="top-controls">
         <div class="search-wrapper">
-          <input type="text" id="searchInput" placeholder="Search by title or author..." />
           <span class="search-icon">🔍</span>
+          <input type="text" id="searchInput" placeholder="Search by title or author..." />
         </div>
       </div>
 
-      <div class="control-panel">
-        <div class="level filter-group">
-          <button class="filter-btn" data-genre="All">All Genres</button>
-          <button class="filter-btn" data-genre="Fantasy">Fantasy</button>
-          <button class="filter-btn" data-genre="Dystopian">Dystopian</button>
-          <button class="filter-btn" data-genre="Science Fiction">Sci-Fi</button>
-          <button class="filter-btn" data-genre="Mystery">Mystery</button>
-          <button class="filter-btn" data-genre="Horror">Horror</button>
-          <button class="filter-btn" data-genre="Fiction">Fiction</button>
-          <button class="filter-btn" data-genre="Adventure">Adventure</button>
-        </div>
+      <!-- GENRE BUTTONS -->
+      <div class="filter-group">
+        <button class="filter-btn" data-genre="All">All Genres</button>
+        <button class="filter-btn" data-genre="Fantasy">Fantasy</button>
+        <button class="filter-btn" data-genre="Dystopian">Dystopian</button>
+        <button class="filter-btn" data-genre="Science Fiction">Sci-Fi</button>
+        <button class="filter-btn" data-genre="Mystery">Mystery</button>
+        <button class="filter-btn" data-genre="Horror">Horror</button>
+        <button class="filter-btn" data-genre="Fiction">Fiction</button>
+        <button class="filter-btn" data-genre="Adventure">Adventure</button>
+      </div>
 
-        <div class="level sort-group">
-          <div class="sort-container">
-            <label for="sortSelector">Sort by:</label>
-            <select id="sortSelector">
-              <option value="none">Default</option>
-              <option value="ratingHigh">Rating: High to Low</option>
-              <option value="ratingLow">Rating: Low to High</option>
-              <option value="yearNew">Year: Newest</option>
-              <option value="yearOld">Year: Oldest</option>
-              <option value="alphaAz">Title: A-Z</option>
-              <option value="alphaZa">Title: Z-A</option>
-            </select>
-          </div>
-          <button id="randomBtn" class="special-btn">✨ Surprise Me!</button>
+      <!-- SORT DROP BAR --->
+      <div class="sort-group">
+        <div class="sort-container">
+          <label for="sortSelector">Sort by:</label>
+          <select id="sortSelector">
+            <option value="none">Default</option>
+            <option value="ratingHigh">Rating: High to Low</option>
+            <option value="ratingLow">Rating: Low to High</option>
+            <option value="yearNew">Year: Newest</option>
+            <option value="yearOld">Year: Oldest</option>
+            <option value="alphaAz">Title: A-Z</option>
+            <option value="alphaZa">Title: Z-A</option>
+          </select>
         </div>
+        <button id="randomBtn" class="special-btn">✨ Surprise Me!</button>
       </div>
     </section>
 
-    <!--What does container below do?-->
     <section id="container"></section>
   </main>
+
+  <footer>
+    <p>© 2026 Felicia Löfström</p>
+  </footer>
 
   <script src="script.js"></script>
 </body>

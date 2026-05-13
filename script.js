@@ -180,40 +180,36 @@ const books = [
     image: './books-images/unknown.jpg'
   }
 ]
-
+// DOM ELEMENTS 
 const container = document.getElementById("container")
 const sortSelector = document.getElementById("sortSelector")
 const randomBtn = document.getElementById("randomBtn")
 const filterButtons = document.querySelectorAll(".filter-btn")
 const searchInput = document.getElementById("searchInput")
+const darkModeToggle = document.getElementById("darkModeToggle")
 
-// books-function
+// --- BOOKS FUNCTION --- 
 const loadBooks = (bookArray) => {
   container.innerHTML = ""
-
-  if (!Array.isArray(bookArray)) {
-    console.error("loadBooks fick ingen array!")
-    return
-  }
 
   if (bookArray.length === 0) {
     container.innerHTML = `
     <div class="no-results">
     <p>"Not all those who wander are lost..."</p>
-    <span>But we couldn't find that book in our library.</span>
+    <p>But we couldn't find that book in our library.</p>
     </div>
     `
     return
   }
 
   bookArray.forEach((book) => {
-    if (!book) return
-
     container.innerHTML += `
       <div class="card">
-        <span class="genre-tag">${book.genre}</span>
-        <button class="like-btn" onclick="this.classList.toggle('liked')">❤️</button>
-        <img src="${book.image}" alt="${book.title}" />
+      <span class="genre-tag">${book.genre}</span>
+      <button class="like-btn" onclick="this.classList.toggle('liked')">
+      ❤️
+      </button>
+      <img src="${book.image}" alt="${book.title}" />
         <div class="card-content">
           <h2>${book.title}</h2>
           <p class="author">By ${book.author}</p>
@@ -221,24 +217,12 @@ const loadBooks = (bookArray) => {
           <p class="book-rating">⭐ ${book.rating}</p>
           <p class="description">${book.description}</p>
       </div>
-    </div>
+    </div >
   `
   })
 }
 
-// Filter-function (Genre)
-const filterBooksByGenre = (genre) => {
-  if (genre === "All") {
-    loadBooks(books)
-  } else {
-    const filteredList = books.filter(book =>
-      book.genre.toLowerCase() === genre.toLowerCase()
-    )
-    loadBooks(filteredList)
-  }
-}
-
-// filter-button
+// --- FILTER --- 
 filterButtons.forEach((btn) => {
   btn.addEventListener("click", (event) => {
     filterButtons.forEach(button => button.classList.remove("active-filter"))
@@ -246,13 +230,26 @@ filterButtons.forEach((btn) => {
 
     const selectedGenre = event.currentTarget.getAttribute("data-genre")
 
-    console.log("1. Du klickade på genren:", selectedGenre)
-
-    filterBooksByGenre(selectedGenre)
+    if (selectedGenre === "All") {
+      loadBooks(books)
+    } else {
+      const filteredList = books.filter(book => book.genre === selectedGenre)
+      loadBooks(filteredList)
+    }
   })
 })
 
-// Sorting (new drop down)
+// --- SEARCH --- 
+searchInput.addEventListener("input", (e) => {
+  const value = e.target.value.toLowerCase()
+  const searchedBooks = books.filter((book) =>
+    book.title.toLowerCase().includes(value) ||
+    book.author.toLowerCase().includes(value)
+  )
+  loadBooks(searchedBooks)
+})
+
+// --- SORTING --- 
 sortSelector.addEventListener("change", (event) => {
   const sortBy = event.target.value
   let sortedArray = [...books]
@@ -269,29 +266,30 @@ sortSelector.addEventListener("change", (event) => {
     sortedArray.sort((a, b) => a.title.localeCompare(b.title))
   } else if (sortBy === "alphaZa") {
     sortedArray.sort((a, b) => b.title.localeCompare(a.title))
+  } else if (sortBy === "none") {
+    sortedArray = books
   }
-
   loadBooks(sortedArray)
 })
 
-// search bar 
-searchInput.addEventListener("input", (e) => {
-  const value = e.target.value.toLowerCase()
-
-  const searchedBooks = books.filter((book) => {
-    return (
-      book.title.toLowerCase().includes(value) ||
-      book.author.toLowerCase().includes(value)
-    )
-  })
-
-  loadBooks(searchedBooks)
-})
-
-// SURPRISE ME (Updated)
+// --- SURPRISE ME --- 
 randomBtn.addEventListener("click", () => {
   const randomIndex = Math.floor(Math.random() * books.length)
   loadBooks([books[randomIndex]])
 })
+
+// --- DARK MODE --- 
+const toggleDarkMode = () => {
+  const body = document.body
+  const btn = document.getElementById("darkModeToggle")
+
+  if (body.getAttribute("data-theme") === "dark") {
+    body.removeAttribute("data-theme")
+    btn.innerHTML = "🌙"
+  } else {
+    body.setAttribute("data-theme", "dark")
+    btn.innerHTML = "☀️"
+  }
+}
 
 loadBooks(books)

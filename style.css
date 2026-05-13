@@ -1,70 +1,92 @@
 :root {
-  --kindle-bg: #f4f1ea;
-  --kindle-text: #2c2c2c;
-  --kindle-accent: #5d5d5d;
+  /* LIGHT MODE - STANDARD */
+  --bg-color: #f4f1ea;
+  --text-color: #2c2c2c;
+  --card-bg: #ffffff;
+  --accent-color: #5d5d5d;
   --magic-gold: #b39b5d;
+  --border-style: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+  /* DARK MODE */
+  --bg-color: #1a1a1a;
+  --card-bg: #2d2d2d;
+  --text-color: #f0f0f0;
+  --accent-color: #ff6b81;
+  --border-style: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 body {
   font-family: 'Playfair Display', serif;
-  background-color: var(--kindle-bg);
-  color: var(--kindle-text);
+  background-color: var(--bg-color);
+  color: var(--text-color);
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* --- HEADER / HERO --- */
 .hero {
-  padding: 60px 20px;
+  padding: 80px 20px;
   text-align: center;
-  border-bottom: 1px double var(--kindle-accent);
+  border-bottom: 2px double var(--magic-gold);
   margin-bottom: 40px;
 }
 
 .hero h1 {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 8vw, 3.5rem);
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 4px;
   margin: 0;
 }
 
-/* --- CONTROL PANEL (3 LEVELS) --- */
+/* --- CONTROL PANEL --- */
 #controls {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: var(--kindle-bg);
-  padding: 20px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
-  gap: 25px;
   align-items: center;
+  gap: 30px;
+  margin: 0 auto 50px;
+  padding: 20px;
+  max-width: 1000px;
 }
 
-.level {
-  width: 100%;
+.top-controls {
   display: flex;
   justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
-/* --- LEVEL 1: SEARCH --- */
-.search-wrapper {
-  position: relative;
+.filter-group,
+.sort-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
   width: 100%;
-  max-width: 500px;
+}
+
+/* --- SEARCH BAR --- */
+.search-wrapper {
+  width: 100%;
+  max-width: 600px;
+  position: relative;
 }
 
 #searchInput {
   width: 100%;
+  text-align: center;
   padding: 12px 15px 12px 40px;
   border: 1px solid var(--magic-gold);
-  background: white;
+  background: var(--card-bg);
+  color: var(--text-color);
   font-family: inherit;
   font-size: 1rem;
+  border-radius: 4px;
 }
 
 .search-icon {
@@ -75,41 +97,75 @@ body {
   opacity: 0.5;
 }
 
-/* --- LEVEL 2 : GENRES ---  */
+/* --- BUTTONS (DARK MODE, SURPRISE, GENRE) --- */
+.special-btn,
 .filter-btn {
-  background: white;
-  border: 1px solid var(--kindle-accent);
-  color: var(--kindle-text);
-  padding: 8px 16px;
+  background-color: var(--card-bg);
+  color: var(--text-color);
   font-family: inherit;
-  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.3 ease;
+}
+
+#darkModeToggle,
+.special-btn {
+  border: 1px solid var(--magic-gold);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+#darkModeToggle {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 1px solid var(--magic-gold);
+  background-color: var(--card-bg);
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+#darkModeToggle:hover {
+  transform: scale(1.1);
+  background-color: var(--magic-gold);
+}
+
+.filter-btn {
+  border: 1px solid var(--accent-color);
+  padding: 8px 16px;
+  font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 1px;
-  cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 2px 2px 0px var(--kindle-accent);
 }
 
-.filter-btn:hover {
-  background: var(--kindle-accent);
-  color: white;
-  transform: translate(-1px, -1px);
-  box-shadow: 4px 4px 0px var(--magic-gold);
-}
-
+.special-btn:hover,
+.filter-btn:hover,
 .filter-btn.active-filter {
-  background: var(--kindle-text);
-  color: var(--kindle-bg);
-  box-shadow: none;
-  transform: translate(1px, 1px);
+  background-color: var(--magic-gold);
+  color: white;
+  border-color: var(--magic-gold);
+  transform: translateY(-2px);
 }
 
-/* --- LEVEL 3 : SORT & SURPRISE --- */
-.sort-group {
-  border-top: 1px double rgba(0, 0, 0, 0.1);
-  padding-top: 20px;
+.filter-btn:hover,
+.filter-btn.active-filter {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
 }
 
+/* --- SORT --- */
 .sort-container {
   display: flex;
   align-items: center;
@@ -120,64 +176,49 @@ body {
 
 #sortSelector {
   padding: 8px;
-  border: 1px solid #ccc;
-  background: white;
-  font-family: inherit;
-}
-
-.special-btn {
-  background: white;
   border: 1px solid var(--magic-gold);
-  color: var(--magic-gold);
-  padding: 10px 20px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
+  background: var(--card-bg);
+  color: var(--text-color);
+  font-family: inherit;
+  border-radius: 4px;
 }
 
-.special-btn:hover {
-  background: var(--magic-gold);
-  color: white;
-  box-shadow: 0 4px 10px rgba(179, 155, 93, 0.3);
-}
-
-/* --- BOOK CARDS --- */
-/* LAYOUT CHOICE : MASONRY STYLE 
-I originally wanted to use CSS Grid Level 3 (grid-template-rows: masonry),
-but due to limited browser support, I've opted for 'column-count'. 
-This achieves the organic, uneven look with maximum browser compatibility. :) 
-*/
+/* --- BOOK CARDS (MASONRY)--- */
 #container {
-  column-count: 4;
-  column-gap: 20px;
-  width: 95%;
+  column-width: 280px;
+  column-gap: 25px;
+  width: 90%;
   max-width: 1200px;
-  margin: 20px auto;
+  margin: 0 auto;
+  display: block;
+  /* delete om det är fult ? */
 }
 
 .card {
   display: inline-block;
   width: 100%;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   break-inside: avoid;
   position: relative;
-
-  background-color: #fff;
+  background-color: var(--card-bg);
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  break-inside: avoid;
 }
 
 .card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .card img {
   width: 100%;
   height: auto;
   display: block;
-  filter: sepia(0.3);
-  /* Keep ? */
+  filter: sepia(0.2);
+  transition: 0.3s;
 }
 
 .card:hover img {
@@ -185,8 +226,7 @@ This achieves the organic, uneven look with maximum browser compatibility. :)
 }
 
 .card-content {
-  padding: 15px;
-  flex-grow: 1;
+  padding: 20px;
 }
 
 .genre-tag {
@@ -198,6 +238,7 @@ This achieves the organic, uneven look with maximum browser compatibility. :)
   padding: 4px 10px;
   font-size: 0.7rem;
   z-index: 5;
+  border-radius: 4px;
 }
 
 .like-btn {
@@ -212,6 +253,7 @@ This achieves the organic, uneven look with maximum browser compatibility. :)
   height: 40px;
   cursor: pointer;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
 }
 
 .like-btn.liked {
@@ -219,35 +261,50 @@ This achieves the organic, uneven look with maximum browser compatibility. :)
   transform: scale(1.1);
 }
 
+/* --- NO RESULTS --- */
 .no-results {
-  grid-column: 1 / -1;
+  column-span: all;
   text-align: center;
-  padding: 50px;
+  padding: 100px 20px;
   font-family: inherit;
+  width: 100%;
 }
 
 .no-results p {
   font-style: italic;
   font-size: 1.5rem;
   margin-bottom: 10px;
-  color: #b39b5d;
+  color: var(--magic-gold);
 }
 
-/* Responsive design for columns */
-@media (max-width: 1100px) {
-  #container {
-    column-count: 3;
+footer {
+  width: 100%;
+  padding: 40px 0 20px;
+  text-align: center;
+  font-family: inherit;
+  color: var(--text-color);
+  opacity: 0.8;
+  margin-top: 50px;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- RESPONSIVE --- */
+@media (min-width: 768px) {
+  .top-controls {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 20px;
   }
-}
 
-@media (max-width: 800px) {
-  #container {
-    column-count: 2;
+  .search-wrapper {
+    flex: 0 1 400px;
   }
-}
 
-@media (max-width: 500px) {
-  #container {
-    column-count: 1;
+  #searchInput {
+    text-align: left;
   }
 }
